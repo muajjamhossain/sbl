@@ -1,0 +1,26 @@
+
+Web Service Url:  https://spgapi.sblesheba.com:6314/
+WebPortal Url: https://spg.sblesheba.com:6313/SpgRequest/PaymentByPortal
+
+user id: a2i@pmo
+password: sbPayment0002
+ST Code: a2i
+
+
+
+-----------------Testing Information----------------------
+--------------Account--------------------
+A/C#: 0002634313655
+Cell #: 01710563521
+OTP: 123456
+
+
+--------------bkash0----
+Wallet : 01770618575  demo
+OTP : 123456 
+PIN : 12121 
+
+
+
+
+

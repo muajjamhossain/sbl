@@ -1,0 +1,147 @@
+Web Service Url:  https://spgapi.sblesheba.com:6314/
+WebPortal Url: https://spg.sblesheba.com:6313/SpgLanding/SpgLanding/{session_token} 
+
+user id: duUser2014
+password: duUserPayment2014
+ST Code: du
+
+
+1. Get Access Token (API-I)
+---------------------------
+POST /api/v2/SpgService/GetAccessToken
+Host: spgapi.sblesheba.com:6314
+Content-Type: application/json
+Authorization: Basic ZHVVc2VyMjAxNDpkdVVzZXJQYXltZW50MjAxNA==
+
+
+Request:
+
+{
+"AccessUser":{
+	"userName":"a2i@pmo",
+	"password":"sbPayment0002"
+},
+"invoiceNo":"INV155422121443", 
+"amount":"400",
+"invoiceDate":"2019-02-26", 
+"accounts": [
+      {
+  "crAccount": "0002634313655",
+  "crAmount": 200
+   } ,
+    {
+  "crAccount": "0002634313651",
+  "crAmount": 200
+   } 
+  ]
+}
+
+
+Response:
+{
+    "status": "200",
+    "msg": "success",
+    "access_token": "QaAu8rkDr1gcR3XwWXCs9nb7ASymYwfxf6er81DlHjb0tIFlNc7WkS/mXWGcjRpnfOfWVXP8GsD9JHpnRPdM0bpYXmcPCIvU0r64mippoqBpTzoKSJJzRQ=="
+}
+
+
+
+2. Create Payment Request
+
+POST /api/v2/SpgService/CreatePaymentRequest
+Host: spgapi.sblesheba.com:6314
+Content-Type: application/json
+Authorization: Basic ZHVVc2VyMjAxNDpkdVVzZXJQYXltZW50MjAxNA==
+
+
+Request:
+
+{
+"authentication":{
+  "apiAccessUserId": "a2i@pmo",
+  "apiAccessToken": "QaAu8rkDr1gcR3XwWXCs9nb7ASymYwfxf6er81DlHjb0tIFlNc7WkS/mXWGcjRpnfOfWVXP8GsD9JHpnRPdM0bpYXmcPCIvU0r64mippoqBpTzoKSJJzRQ=="
+},  
+  "referenceInfo": {
+  "InvoiceNo": "INV155422121443",
+  "invoiceDate": "2019-02-26",
+  "returnUrl": "http://localhot",
+  "totalAmount": "400",
+  "applicentName": "Md. Hasan Monsur",
+  "applicentContactNo": "01710563521",
+  "extraRefNo": "2132"
+   },
+  "creditInformations": [
+   {
+    "slno": "1",
+    "crAccount": "0002634313655",
+    "crAmount": "200",
+    "tranMode": "TRN"
+   },
+   {
+     "slno": "2",
+    "crAccount": "0002634313651",
+    "crAmount": "200",
+    "tranMode": "TRN"
+   }
+  ]
+}
+
+
+Response:
+
+{
+    "status": "200",
+    "session_token": "8217fe3de07b00e50186209059f91dfb09ff6b9c",
+    "message": "success"
+}
+
+
+3. redirect to SPG
+
+https://spg.sblesheba.com:6313/SpgLanding/SpgLanding/{session_token} 
+
+
+
+4. redirect to Service portal
+
+{returnUrl}/?session_token={session_tocken}&status={StatusCode}   //counter/success/fail
+
+5. Transaction Verify
+
+POST /api/v2/SpgService/TransactionVerificationWithToken
+Host: spgapi.sblesheba.com:6314
+Content-Type: application/json
+Authorization: Basic ZHVVc2VyMjAxNDpkdVVzZXJQYXltZW50MjAxNA==
+
+Request:
+
+{
+  "session_Token": "8217fe3de07b00e50186209059f91dfb09ff6b9c"   
+}
+
+Response:
+{
+    "status": "200",
+    "msg": "Success",
+    "transactionId": "1902269000000000",
+    "transactionDate": "2022-02-10 00:00:00",
+    "InvoiceNo": "INV155422121443",
+    "invoiceDate": "2019-02-26",
+    "brCode": "Later",
+    "applicentName": "Md. Hasan Monsur",
+    "applicentContactNo": "01710563521",
+    "totalAmount": "400",
+    "paymentStatus": "200",
+    "payMode": "ANY",
+    "payAmount": "400",
+    "vat": "0",
+    "commission": "0",
+    "scrollNo": ""
+}
+
+
+
+
+
+
+
